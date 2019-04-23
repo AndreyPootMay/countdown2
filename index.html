@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Cuenta regresiva</title>
+	<link rel="stylesheet/scss" type="text/css" href="style.scss">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/sass.js/0.6.3/sass.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div align="center">
+	  <h1 class="lab">Cumpleaños de Josette</h1>
+	  <h6 class="lab2">Hecho por el Puto Andrey</h6>
+	</div>
+		<ul id="countdown">
+		<div class="row">
+			<div class="col-md-6 col-xs-3">
+			  <li id="days">
+			    <div class="number">00</div>
+			    <div class="label">Días</div>
+			  </li>
+			</div>
+			<div class="col-md-6 col-xs-3">
+				<li id="hours">
+				   <div class="number">00</div>
+				   <div class="label">Horas</div>
+			  	</li>		
+			</div>
+			<div class="col-md-6 col-xs-3">
+			  <li id="minutes">
+			    <div class="number">00</div>
+			    <div class="label">Minutos</div>
+			  </li>
+			</div> 
+			<div class="col-md-6 col-xs-3">
+			<li id="seconds">
+			    <div class="number">00</div>
+		    	<div class="label">Segundos</div>
+		  	</li>
+			</div>
+		</div>
+		</ul>
+	<script type="text/javascript" src="script.js"></script>
+	<script>
+    (async () => {
+      const compiled = (await Promise.all(
+        [...document.querySelectorAll("link")]
+          .filter(l => l.rel === 'stylesheet/scss')
+          .map(async l => {
+            url = l.href;
+            const code = await (await fetch(url)).text();
+            const basename = url.substring(url.lastIndexOf("/")+1);
+            Sass.writeFile(basename, code);
+            return Sass.compile(`@import "${basename}"; `);
+          })
+      )).join("\n");
+      document.head.innerHTML += `<style>${compiled}</style>`;
+      console.log(compiled);
+    })();
+  </script>
+</body>
+</html>
